@@ -1,0 +1,25 @@
+.root{
+    -fx-background-color: #FFFAF0;
+}
+
+.label{
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #5F9EA0;
+    -fx-opacity: 0.99;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.button{
+    -fx-background-color: #5F9EA0;
+    -fx-background-radius: 6, 5;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 17pt;
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 7px;
+}
