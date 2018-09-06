@@ -11,10 +11,19 @@ import javafx.stage.Stage;
 import sample.entity.Human;
 import sample.validator.DataValidator;
 
-public class EditController {
+public class AddEditController {
 
     @FXML
     private AnchorPane  anchorPane ;
+
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private TextField ageTextField;
+
+    @FXML
+    private TextField birthdayTextField;
 
     @FXML
     private TextField nameTextF;
@@ -33,15 +42,31 @@ public class EditController {
         stage.hide();
     }
 
-    public void actionSave(ActionEvent actionEvent){
+    public void actionSaveUpdated(ActionEvent actionEvent){
         DataValidator dataValidator = new DataValidator();
 
         if(dataValidator.validateAge(ageTextF.getText()) && dataValidator.validateDate(birthdayTextF.getText())) {
             Human human = new Human(nameTextF.getText(), Integer.parseInt(ageTextF.getText()), birthdayTextF.getText());
+
             Controller.getInstance().updateHuman(human);
 
             actionClose(actionEvent);
         } else {
+            showErrorDialog("Incorrect input!", "Age must be an integer number and birthday must be in dd/mm/yyyy format.");
+        }
+    }
+
+    public void addHuman(ActionEvent actionEvent){
+
+        DataValidator dataValidator = new DataValidator();
+
+        if(dataValidator.validateAge(ageTextField.getText()) && dataValidator.validateDate(birthdayTextField.getText())){
+            Human human = new Human(nameTextField.getText(), Integer.parseInt(ageTextField.getText()), birthdayTextField.getText());
+
+            Controller.getInstance().addHuman(human);
+
+            actionClose(actionEvent);}
+        else {
             showErrorDialog("Incorrect input!", "Age must be an integer number and birthday must be in dd/mm/yyyy format.");
         }
     }
@@ -68,4 +93,5 @@ public class EditController {
     public AnchorPane getAnchorPane() {
         return anchorPane;
     }
+
 }

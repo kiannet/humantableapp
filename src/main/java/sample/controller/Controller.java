@@ -18,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.entity.Human;
-import sample.sort.NameComparator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,7 +40,7 @@ public class Controller implements Initializable {
     private TreeTableColumn<Human, String> columnBirthday;
 
 
-    private EditController editController;
+    private AddEditController editController;
 
 
     private static Controller controller;
@@ -65,7 +64,7 @@ public class Controller implements Initializable {
     private void initList(){
         Human human1 = new Human("Anna", 20, "20/11/1998");
         Human human2 = new Human("Irina", 20, "05/09/1998");
-        Human human3 = new Human("Vlad", 20, "21/11/1998");
+        Human human3 = new Human("Wlad", 20, "21/11/1998");
         Human human4 = new Human("Ivan", 20, "25/11/1998");
         Human human5 = new Human("Nikita", 20, "20/10/1998");
 
@@ -78,7 +77,7 @@ public class Controller implements Initializable {
     }
 
     private void setTreeView(TreeItem<Human> rootNode) {
-        FXCollections.sort(humans, new NameComparator());
+        FXCollections.sort(humans);
         for(Human human : humans){
             rootNode.getChildren().add(new TreeItem<>(human));
         }
@@ -151,6 +150,7 @@ public class Controller implements Initializable {
 
     public void updateHuman(Human updatedHuman){
         humanTable.getRoot().getChildren().remove(treeItem);
+        humans.add(updatedHuman);
         TreeItem<Human> rootNode = new TreeItem<>(updatedHuman);
         humanTable.getRoot().getChildren().add(rootNode);
 
@@ -221,7 +221,6 @@ public class Controller implements Initializable {
         columnBirthday.setCellValueFactory(new TreeItemPropertyValueFactory<Human, String>("birthdayString"));
 
         initList();
-        FXCollections.sort(humans);
 
         TreeItem<Human> rootNode = new TreeItem<Human>(humans.get(0));
 
